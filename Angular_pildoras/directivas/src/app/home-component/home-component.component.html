@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="col">
+      <h1>{{ titulo }}</h1>
+      <br><br>
+      <form class="form-group row">
+        <div class="for-group col-md-3">
+          <label class="nombre">Nombre:</label>
+          <input type="text" name="nombre" placeholder="nombre" class="form-control" [(ngModel)]="cuadroNombre">
+        </div>
+        <div class="for-group col-md-3">
+          <label class="nombre">Apellido:</label>
+          <input type="text" name="apellido" placeholder="apellido" class="form-control" [(ngModel)]="cuadroApellido">
+      </div>
+      <div class="for-group col-md-3">
+          <label class="nombre">Cargo:</label>
+          <input type="text" name="cargo" placeholder="cargo" class="form-control" [(ngModel)]="cuadroCargo">
+        </div>
+        <div class="for-group col-md-3">
+          <label class="nombre">Salario:</label>
+          <input type="number" name="salario" placeholder="salario" class="form-control" [(ngModel)]="cuadroSalario">
+        </div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary" (click)="agregarEmpleado()" style="margin-top: 35px;">
+            Agregar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <br/><br/>
+  
+  <!-- Comunicación componente Padrea a Hijo que se hace mediante @Input() -->
+  <app-empleado-hijo-c 
+    *ngFor="let empleado of empleados; 
+    let i=index" 
+    [empleadoDeLista] = "empleado"
+    [indice] = "i"
+  >
+  </app-empleado-hijo-c>
+  

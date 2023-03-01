@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div>
+        <a [routerLink]="['/actualiza',indice]" style="color: blueviolet;">
+          {{ indice + 1 }} {{ empleadoDeLista.nombre }} {{ empleadoDeLista.apellido }} {{ empleadoDeLista.cargo }} ${{ empleadoDeLista.salario }}
+        </a>
+        <a [routerLink]="['/modifica',indice]" [queryParams]="{accion:'1'}" style="color: olivedrab;">
+          Actualiza
+        </a>
+        &nbsp;&nbsp;
+        <a [routerLink]="['/modifica',indice]" [queryParams]="{accion:'2'}" style="color: red;">
+          Eliminar
+        </a>
+      </div>
+         
+      <ul style="list-style: none;">
+        <li *ngFor="let caracteristica of arrayCaracteristicas">{{ caracteristica }}</li>
+      </ul>
+      
+    </div>
+  </div>
+</div>
