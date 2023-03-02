@@ -1,19 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import firebase from 'firebase/compat/app';
+import { LoginService } from './login/login.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  
-  mensaje = "";
-  registrado = false; 
-  nombre:string = "";
-  apellido:string = "";
-  cargo:string = "";
-  entradas:Array<any>;
+export class AppComponent implements OnInit { 
 
   
 
@@ -31,19 +25,12 @@ export class AppComponent implements OnInit {
   
 
   // Inyectar en el componente el servicio creado
-  constructor() {
+  constructor(private loginService:LoginService) {
     
     // Almacenar en el array empleados la información del servicio que contiene dicha información
     // Esta alternativa es sin implementar el OnInti
     // this.empleados = this.empleadosService.empleados;
 
-    this.entradas = [
-      {titulo: "Rust"},
-      {titulo: "C#++"},
-      {titulo: "Perl"},
-      {titulo: "Java"},
-      {titulo: "Ruby"},
-    ]
   }
 
   ngOnInit(): void {
@@ -54,13 +41,14 @@ export class AppComponent implements OnInit {
     });
 
   }
+ 
 
-  
-  
-  registrarUsuario() {
-    this.registrado = true;
-    this.mensaje = "Usuario registrado con éxito";
+  estaLogueado() {
+    return this.loginService.estaLogueado();
   }
 
-  
+  logout() {
+    this.loginService.logout();
+  }
+
 }

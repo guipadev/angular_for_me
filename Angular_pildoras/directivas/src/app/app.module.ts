@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -19,13 +20,15 @@ import { ErrorPersonalizadoComponentComponent } from './error-personalizado-comp
 import { DataService } from './data.service';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
+import { LoginGuardian } from './login/login-guardian';
 
 // Creación de rutas
 const appRoutes:Routes = [
+  {path: '', component: AppComponent },
   {path: 'home', component: HomeComponentComponent},
   {path: 'proyectos', component: ProyectoComponentComponent},
   {path: 'quienes', component: QuienesComponentComponent},
-  {path: 'contacto', component: ContactoComponentComponent},
+  {path: 'contacto', component: ContactoComponentComponent, canActivate:[LoginGuardian]}, // protegida la pagina
   {path: 'actualiza/:id', component: ActualizaComponentComponent},
   {path: 'modifica/:id', component: ModificaComponentComponent},
   {path: 'login', component: LoginComponent},
@@ -55,7 +58,9 @@ const appRoutes:Routes = [
     ServicioEmpleadosService,
     EmpleadosService,
     DataService,
-    LoginService
+    LoginService,
+    CookieService,
+    LoginGuardian
   ], // Registrar servicio
   bootstrap: [AppComponent]
 })

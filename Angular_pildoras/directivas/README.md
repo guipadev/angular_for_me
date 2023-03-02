@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
 
+## Explicación
+
+Proyecto CRUD conectado a firebase y desplegado en este mismo servicio en la siguiente url: https://mis-clientes-1d4b3.web.app/
+
+Ruta protegida contacto, se puede loguear con user: prueba@gmail.com password: prueba
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">App</a>
+    <a class="navbar-brand" href="/home">App</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -27,90 +27,23 @@
           <a class="nav-link" href="/contacto">Contacto</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <ul class="navbar-nav d-flex">
+        <li class="nav-item" *ngIf="!estaLogueado()">
+          <a class="nav-link" routerLink="/login">
+            Login
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="estaLogueado()">
+          <a class="nav-link" (click)="logout()">
+            Logout
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
 
-<h1 style="text-align: center">Ejercicio App</h1>
-
-<div class="container">
-  <form>
-    <input
-      type="text"
-      name="nombre"
-      [(ngModel)]="nombre"
-      placeholder="Digite Nombres"
-    /><br/><br/>
-    <input
-      type="text"
-      name="apellido"
-      [(ngModel)]="apellido"
-      placeholder="Digite Apellidos"
-    /><br/><br/>
-    <input
-      type="text"
-      name="cargo"
-      [(ngModel)]="cargo"
-      placeholder="Digite Cargo"
-    /><br/><br/>
-    <input
-      type="submit"
-      name="registrar"
-      (click)="registrarUsuario()"
-      class="btn btn-danger"
-    /><br />
-  </form>
-
-  <br />
-
-  <p *ngIf="registrado; else sinRegistrar">
-    {{ mensaje }} con el nombre de {{ nombre }} {{ apellido }} y tiene el cargo
-    de
-    <span [ngStyle]="{ color: cargo == 'director' ? 'red' : 'blue' }">{{
-      cargo
-    }}</span>
-    uso ngClass retificamos color cuando es cantante:
-    <span [ngClass]="{ paraCantantes: cargo == 'cantante' }">{{ cargo }}</span>
-  </p>
-
-  <!-- No carga por defecto -->
-  <ng-template #sinRegistrar>
-    <p>Nadie registrado</p>
-  </ng-template>
-
-  <hr />
-
-  <ul>
-    <li *ngFor="let entrada of entradas; let i = index">
-      <span style="color: tomato">
-        {{ entrada.titulo }}
-      </span>
-      . Entrada {{ i + 1 }}
-    </li>
-  </ul>
-</div>
-
-<hr/>
 <!-- Desde este componente principal gestionamos el enrutamiento -->
 <router-outlet></router-outlet>
 
-<!--
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <div *ngFor="let empleado of empleados; let i=index">
-        {{i+1}} {{ empleado.nombre }} {{ empleado.apellido }} {{ empleado.cargo }} ${{ empleado.salario }}
-      </div>
-    </div>
-  </div>
-</div>
--->
+
