@@ -1,0 +1,7 @@
+<!-- Renderizar el titulo y un boton para linkiar a otra página -->
+<div class="breadcrum">
+  <h1 class="breadcrum__title">{{ title }}</h1>
+  <button class="breadcrum__action">
+    <a [routerLink]="['/' + link]"> Ir a {{ titleButton }}</a>
+  </button>
+</div>

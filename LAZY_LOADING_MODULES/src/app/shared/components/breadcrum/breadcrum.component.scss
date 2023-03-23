@@ -1,0 +1,26 @@
+.breadcrum {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  &__title {
+    font-size: 40px;
+  }
+
+  &__action {
+    border: none;
+    background-color: var(--primary-blue);
+    border-radius: 5px;
+    cursor: pointer;
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 16px;
+      padding: 10px 10px;
+      color: var(--white);
+    }
+  }
+}

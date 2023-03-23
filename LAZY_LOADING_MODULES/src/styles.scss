@@ -1,0 +1,13 @@
+:root {
+  --white: #fff;
+  --dark-grey: #141d2f;
+  --card-dark: #1e2a47;
+  --primary-blue: #0079ff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Space Mono', monospace;
+  background-color: var(--dark-grey);
+  color: var(--white);
+}
