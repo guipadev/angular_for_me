@@ -1,0 +1,71 @@
+<h3 style="text-align: center">Ejercicio App</h3>
+
+<div class="container">
+  <form>
+    <input
+      type="text"
+      name="nombre"
+      [(ngModel)]="nombre"
+      placeholder="Digite Nombres"
+      style="margin-right: 22px;"
+    />
+    <input
+      type="text"
+      name="apellido"
+      [(ngModel)]="apellido"
+      placeholder="Digite Apellidos"
+      style="margin-right: 22px;"
+      />
+    <input
+      type="text"
+      name="cargo"
+      [(ngModel)]="cargo"
+      placeholder="Digite Cargo"
+      style="margin-right: 22px;"
+      />  
+    <input
+      type="submit"
+      name="registrar"
+      (click)="registrarUsuario()"
+      class="btn btn-danger"
+    />
+  </form>
+
+  <p *ngIf="registrado; else sinRegistrar">
+    {{ mensaje }} con el nombre de {{ nombre }} {{ apellido }} y tiene el cargo
+    de
+    <span [ngStyle]="{ color: cargo == 'director' ? 'red' : 'blue' }">{{
+      cargo
+    }}</span>
+    uso ngClass retificamos color cuando es cantante:
+    <span [ngClass]="{ paraCantantes: cargo == 'cantante' }">{{ cargo }}</span>
+  </p>
+
+  <!-- No carga por defecto -->
+  <ng-template #sinRegistrar>
+    <p>Nadie registrado</p>
+  </ng-template>
+
+  <hr />
+
+  <ul>
+    <li *ngFor="let entrada of entradas; let i = index">
+      <span style="color: tomato">
+        {{ entrada.titulo }}
+      </span>
+      . Entrada {{ i + 1 }}
+    </li>
+  </ul>
+</div>
+
+<!--
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div *ngFor="let empleado of empleados; let i=index">
+        {{i+1}} {{ empleado.nombre }} {{ empleado.apellido }} {{ empleado.cargo }} ${{ empleado.salario }}
+      </div>
+    </div>
+  </div>
+</div>
+-->
