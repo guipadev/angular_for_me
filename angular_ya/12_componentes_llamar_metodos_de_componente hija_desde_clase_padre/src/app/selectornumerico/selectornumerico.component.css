@@ -1,0 +1,38 @@
+.selector {
+  display:inline-flex;
+  margin:0.2rem;
+}
+.valor {
+  display:inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background:greenyellow;
+  font-size:2rem;
+}
+
+button {
+  height: 3rem;
+  border: .1em solid tomato;
+  font-size: 1.1em;
+  background-color: tomato;
+}
+
+/*
+button {
+  width: 100px;
+  background-color: black;
+  color: #FFFF;
+  
+  border-radius: 5em;
+  text-align: center;
+  
+  line-height: 2em;
+  cursor: pointer;  
+}
+*/
+
+button:hover {
+  background-color: goldenrod;
+}
