@@ -1,0 +1,26 @@
+<!-- 
+    Transformación de datos usando pipes (tuberías)
+    Use pipe para transformar cadenas, montos de moneda, fechas y otros datos para su visualización. 
+    Las canalizaciones son funciones simples para usar en expresiones de plantilla para aceptar un valor 
+    de entrada y devolver un valor transformado. 
+    Las pipes son útiles porque puede usarlas en toda su aplicación, mientras solo declara cada pipe una vez. 
+    Por ejemplo, usaría una canalización para mostrar una fecha como el 15 de abril de 1988 en lugar del formato 
+    de cadena sin formato.
+
+
+    PIPE	        DETALLES
+    DatePipe	    Da formato a un valor de fecha de acuerdo con las reglas locales.
+    UpperCasePipe	Transforma el texto a mayúsculas.
+    LowerCasePipe	Transforma el texto a minúsculas.
+    CurrencyPipe	Transforma un número en una cadena de moneda, formateada de acuerdo con las reglas locales.
+    DecimalPipe	    Transforma un número en una cadena con un punto decimal, formateada de acuerdo con las reglas locales.
+    PercentPipe	    Transforma un número en una cadena de porcentaje, formateada de acuerdo con las reglas locales.
+-->
+
+<p>Nombre del cliente:{{ nombre }}</p>
+<p>Nombre del cliente en mayúsculas:{{ nombre | uppercase }}</p>
+<p>Nombre del cliente en minúsculas:{{ nombre | lowercase }}</p>
+<p>El saldo es:{{ saldo | currency:'$'}}</p>
+<p>Días laborables: {{ dias | slice:1:6}}</p>
+<p>{{ articulos | json }}</p>
+<p>Fecha actual:{{ fechaActual | date:'d/M/y' }}</p>
