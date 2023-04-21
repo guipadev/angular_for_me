@@ -1,0 +1,86 @@
+<h1 style="text-align: center">Bienvenido a {{ title }}</h1>
+
+<div>
+  <p>Nombre del Empleado:{{ nombre }}</p>
+  <p>Edad:{{ edad }}</p>
+  <p>
+    Los últimos tres sueldos son: {{ sueldos[0] }}, {{ sueldos[1] }} y
+    {{ sueldos[2] }}
+  </p>
+  <p>En los últimos 3 meses ha ganado: {{ ultimos3Sueldos() }}</p>
+  <p>{{ esActivo() }}</p>
+
+  <!--
+ Directiva *ngIf condicionar si dicha marca debe agregarse a la página HTML.
+ Tambien podemos plantear un else con la siguiente sintaxis:
+ -->
+  <p *ngIf="edad >= 18; else menor">Es mayor de edad.</p>
+  <ng-template #menor>
+    <p>Es un menor de edad.</p>
+  </ng-template>
+
+  <!-- Directiva *ngFor nos permite generar muchos elementos HTML repetidos a partir del recorrido de un arreglo de datos. -->
+  <table border="1">
+    <tr>
+      <td>Sueldos</td>
+    </tr>
+    <tr *ngFor="let sueldo of sueldos">
+      <td>{{ sueldo }}</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Dentro de las dos llaves abiertas y cerradas Angular nos permite efectuar una operación: -->
+<p>
+  Sumando sueldos en los últimos 3 meses ha ganado:
+  {{ sueldos[0] + sueldos[1] + sueldos[2] }}
+</p>
+<!--Primero se opera la expresión dispuesta dentro de las llaves previo a mostrarla.-->
+
+<!-- Otro ejemplo: -->
+<p>El empleado dentro de 5 años tendrá: {{ edad + 5 }} años de edad</p>
+
+<!--
+Podemos utilizar la interpolación como valor en propiedades de elementos HTML.
+Si en la clase tenemos definida la propiedad:
+sitio='http://www.google.com';
+Luego en la vista podemos interpolar la propiedad 'url' del elemento 'a' con la siguiente
+sintaxis:
+-->
+<p>Puede visitar el sitio google ingresando <a href="{{ sitio }}">aquí</a></p>
+
+<!--
+Captura de eventos
+Concepto 'binding' en una dirección
+(cambio en atributos de la clase se actualizan en la vista)
+-->
+<div>
+  <p>{{contador}}</p>
+  <button (click)="incrementar()">Sumar 1</button>
+  <button (click)="decrementar()">Restar 1</button>
+</div>
+
+<!--
+Directiva ngModel
+Luego en la vista definimos la directiva ngModel entre corchetes y le asignamos el nombre de la propiedad definida en la clase:
+
+<input type="text" [ngModel]="nombre">
+
+Lo que hay que tener en cuenta que es un enlace en una única dirección:
+
+El valor de la propiedad de la clase se refleja en la interfaz visual.
+Si el operador cambia el contenido del control 'input' por ejemplo por el nombre 'ana'
+luego la propiedad 'nombre' de la clase sigue almacenando el valor 'juan'.
+
+Si queremos que el enlace sea en las dos direcciones debemos utilizar la siguiente sintaxis:
+
+<input type="text" [(ngModel)]="nombre">
+-->
+
+<!-- Definimos las directiva ngModel para cada control es: -->
+
+<div>
+  <p>Ingrese nombre <input type="text" [(ngModel)] = "nombre"></p>
+  <p>Ingrese apellido <input type="text" [(ngModel)] = "apellido"></p>
+  <p>Nombre completo: {{ nombre }}, {{ apellido }}</p>
+</div>

@@ -1,0 +1,24 @@
+#prueba {
+    background-color: rgba(255, 127, 80, 0.527);
+}
+
+
+
+
+table {
+    background-color: coral;
+    border: 6px solid yellowgreen;
+}
+
+button {
+    color: #0099CC;
+    border: 2px solid #0099CC;
+    background: black;
+    border-radius: 6px;
+
+}
+
+button:hover {
+    background-color: #008CBA;
+    color: white;
+}
