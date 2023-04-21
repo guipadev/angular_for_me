@@ -1,9 +1,3 @@
-Hemos dicho que Angular es un framework para el desarrollo de aplicaciones web de una sola página. 
-Una situación muy común es tener que almacenar en un servidor de internet los datos que se ingresan en la aplicación Angular.
-
-Existen muchas tecnologías para procesar los datos que envía y recibe la aplicación Angular, 
-una de la más extendidas en el lenguaje PHP y mediante este acceder a una base de datos MySql.
-
 En este concepto dejaremos en forma muy clara todos los pasos que debemos desarrollar tanto en el cliente (aplicación angular) 
 como en el servidor (aplicación PHP y MySql)
 
@@ -12,54 +6,144 @@ Confeccionar una aplicación que permita administrar una lista de artículos, ca
 Se debe poder agregar, borrar y modificar los datos de un artículo almacenados en una base de datos MySQL 
 y accedida con una programa en PHP.
 
-Recordemos que la propuesta del framework de Angular es delegar todas las responsabilidades de acceso a datos (peticiones y envío de datos) 
-y lógica de negocios en otras clases que colaboran con las componentes. 
-Estas clases en Angular se las llama servicios.
 
-Crearemos el servicio 'articulos' para ello utilizamos Angular CLI: ng generate service articulos
+Tenemos una serie de archivos PHP que reciben datos en formato JSON y retornan también un JSON.
 
+- Archivo 'recuperartodos.php' retorna en formato JSON todos los artículos:
+```
+<?php 
+  header('Access-Control-Allow-Origin: *'); 
+  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+  
+  require("conexion.php");
+  $con=retornarConexion();
 
-### crear una base de datos en MySQL llamada 'bd1' y crear la siguiente tabla:
+  $registros=mysqli_query($con,"select codigo, descripcion, precio from articulos");
+  $vec=[];  
+  while ($reg=mysqli_fetch_array($registros))  
+  {
+    $vec[]=$reg;
+  }
+  
+  $cad=json_encode($vec);
+  echo $cad;
+  header('Content-Type: application/json');
+?>
+```
 
-CREATE DATABASE IF NOT EXISTS bd1 CHARACTER SET utf8 COLLATE utf8_general_ci
+- Archivo 'alta.php' recibe los datos en formato JSON y los almacena en la tabla:
+```
+<?php 
+  header('Access-Control-Allow-Origin: *'); 
+  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+  
+  $json = file_get_contents('php://input');
+ 
+  $params = json_decode($json);
+  
+  require("conexion.php");
+  $con=retornarConexion();
+  
 
-USE bd1;
-CREATE TABLE articulos (
-  codigo int AUTO_INCREMENT,
-  descripcion varchar(50),
-  precio float,
-  PRIMARY KEY (codigo)
-)
+  mysqli_query($con,"insert into articulos(descripcion,precio) values
+                  ('$params->descripcion',$params->precio)");
+    
+  
+  class Result {}
 
-SELECT * FROM bd1.articulos;
+  $response = new Result();
+  $response->resultado = 'OK';
+  $response->mensaje = 'datos grabados';
 
-INSERT INTO bd1.articulos 
-(codigo, descripcion, precio) VALUES
-(null, 'Botas de cuero', 1000);
+  header('Content-Type: application/json');
+  echo json_encode($response);  
+?>
+```
 
-INSERT INTO bd1.articulos 
-(codigo, descripcion, precio) VALUES
-(null, 'Pala de metal', 500),
-(null, 'Pica de hierro', 3100),
-(null, 'Manguera plastica', 20);
+- Archivo 'baja.php':
+```
+<?php 
+  header('Access-Control-Allow-Origin: *'); 
+  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+  
+  require("conexion.php");
+  $con=retornarConexion();
+  
+  mysqli_query($con,"delete from articulos where codigo=$_GET[codigo]");
+    
+  
+  class Result {}
 
+  $response = new Result();
+  $response->resultado = 'OK';
+  $response->mensaje = 'articulo borrado';
 
-### Consultas end point
-GET - http://localhost:8080/api/v1/recuperartodos
+  header('Content-Type: application/json');
+  echo json_encode($response);  
+?>
+```
 
+- Archivo 'modificacion.php':
+``
+<?php 
+  header('Access-Control-Allow-Origin: *'); 
+  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+  
+  $json = file_get_contents('php://input');
+ 
+  $params = json_decode($json);
+  
+  require("conexion.php");
+  $con=retornarConexion();
+  
 
-POST - http://localhost:8080/api/v1/alta
-{
-    "descripcion": "Barreton hierro", 
-    "precio": "100"
+  mysqli_query($con,"update articulos set descripcion='$params->descripcion',
+                                          precio=$params->precio
+                                          where codigo=$params->codigo");
+    
+  
+  class Result {}
+
+  $response = new Result();
+  $response->resultado = 'OK';
+  $response->mensaje = 'datos modificados';
+
+  header('Content-Type: application/json');
+  echo json_encode($response);  
+?>
+```
+
+- Archivo 'seleccionar.php':
+```
+<?php 
+  header('Access-Control-Allow-Origin: *'); 
+  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+  
+  require("conexion.php");
+  $con=retornarConexion();
+
+  $registros=mysqli_query($con,"select codigo, descripcion, precio from articulos where codigo=$_GET[codigo]");
+    
+  if ($reg=mysqli_fetch_array($registros))  
+  {
+    $vec[]=$reg;
+  }
+  
+  $cad=json_encode($vec);
+  echo $cad;
+  header('Content-Type: application/json');
+?> 
+```
+
+- Archivo 'conexion.php':
+```
+<?php
+function retornarConexion() {
+  $con=mysqli_connect("localhost","root","","bd1");
+  return $con;
 }
+?>
+```
 
-DELETE - http://localhost:8080/api/v1/baja/5
 
-GET - http://localhost:8080/api/v1/seleccionar/4
 
-PUT - http://localhost:8080/api/v1/modificacion/4
-{
-    "descripcion": "Balde aluminio", 
-    "precio": "500"
-}
