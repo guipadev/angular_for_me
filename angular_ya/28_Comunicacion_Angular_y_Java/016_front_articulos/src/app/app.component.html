@@ -1,5 +1,6 @@
 <div>
   <h1>Administración de artículos</h1>
+  <div class="login-box0">
     <table border="1" *ngIf="hayRegistros(); else sinarticulos">
       <tr>
         <td>Codigo</td>
@@ -9,33 +10,72 @@
         <td>Seleccionar</td>
       </tr>
 
-      <tr *ngFor="let art of articulos">
-        <td>{{art.codigo}}</td>
-        <td>{{art.descripcion}}</td>
-        <td>{{art.precio}}</td>
+      <tr *ngFor="let articulo of articulos">
+        <td>{{ articulo.codigo }}</td>
+        <td>{{ articulo.descripcion }}</td>
+        <td>{{ articulo.precio }}</td>
         <td>
-          <!-- El borrado de un artículo se efectúa cuando el operador presiona el botón con la etiqueta 'Borra?':
-          Se llama al método 'baja' de la clase 'AppComponent' y se le pasa como parámetro el código de artículo a borrar. -->
-          <button (click)="baja(art.codigo)">Borrar?</button>
+          <button
+            (click)="eliminarArticulo(articulo.codigo)"
+            class="custom-btn btn-5"
+          >
+            Borrar
+          </button>
         </td>
         <td>
-          <button (click)="seleccionar(art.codigo)">Seleccionar</button>
+          <button
+            (click)="obtenerArticuloPorId(articulo.codigo)"
+            class="custom-btn btn-7"
+          >
+            Seleccionar
+          </button>
         </td>
       </tr>
     </table>
-    <ng-template #sinarticulos>
-      <p>No hay articulos.</p>
-    </ng-template>
-    <div>
-      <p>
-        descripcion:<input type="text" [(ngModel)]="art.descripcion" />
-      </p>
-      <p>
-        precio:<input type="number" [(ngModel)]="art.precio" />
-      </p>
-      <p>
-        <button (click)="alta()">Agregar</button>
-        <button (click)="modificacion()">Modificar</button>
-      </p>
-    </div>
+  </div>
+
+  <ng-template #sinarticulos>
+    <p>No hay articulos.</p>
+  </ng-template>
+
+  <!-- Agrega un mensaje de error si no hay registros -->
+  <!-- <p *ngIf="!hayRegistros()">No hay registros para mostrar</p> -->
+
+  <div class="login-box">
+    <form>
+      <div class="user-box">
+        <input type="number" [(ngModel)]="articuloForm.codigo" name="codigo" />
+        <label>Código: </label>
+      </div>
+
+      <div class="user-box">
+        <input
+          type="text"
+          [(ngModel)]="articuloForm.descripcion"
+          name="descripcion"
+        />
+        <label>Descripción: </label>
+      </div>
+
+      <div class="user-box">
+        <input type="number" [(ngModel)]="articuloForm.precio" name="precio" />
+        <label>Precio: </label>
+      </div>
+
+      <button
+        *ngIf="guardandoNuevoArticulo"
+        (click)="guardarArticulo()"
+        class="custom-btn btn-14"
+      >
+        Guardar
+      </button>
+      <button
+        *ngIf="obtenerArticuloPorId"
+        (click)="actualizarArticulo()"
+        class="custom-btn btn-15"
+      >
+        Actualizar
+      </button>
+    </form>
+  </div>
 </div>

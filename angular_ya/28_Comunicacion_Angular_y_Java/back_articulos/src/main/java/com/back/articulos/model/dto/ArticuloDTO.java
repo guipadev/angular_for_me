@@ -5,13 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Map;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ArticuloDTO {
+public class ArticuloDTO implements Serializable {
 
     private Long codigo;
     private String descripcion;
