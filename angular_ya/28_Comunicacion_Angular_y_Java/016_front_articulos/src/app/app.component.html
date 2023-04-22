@@ -1,6 +1,6 @@
-<div>
-  <h1>Administración de artículos</h1>
-  <div class="login-box0">
+<h1>Formulario Productos</h1>
+<div class="flexbox-container tablita">
+  <div>
     <table border="1" *ngIf="hayRegistros(); else sinarticulos">
       <tr>
         <td>Codigo</td>
@@ -41,8 +41,8 @@
   <!-- Agrega un mensaje de error si no hay registros -->
   <!-- <p *ngIf="!hayRegistros()">No hay registros para mostrar</p> -->
 
-  <div class="login-box">
-    <form>
+  <div>
+    <form class="login-box">
       <div class="user-box">
         <input type="number" [(ngModel)]="articuloForm.codigo" name="codigo" />
         <label>Código: </label>
