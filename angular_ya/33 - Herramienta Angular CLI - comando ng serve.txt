@@ -1,8 +1,7 @@
-Otro comando que hemos utilizado en cada uno de los proyectos que hemos implementado es 'serve' (desde el principio hemos utilizado la opción -o):
-
 ng serve -o
 
-Recordemos que debemos ejecutar el comando serve en la carpeta donde se haya nuestra aplicación Angular. Al disponer la opción -o se abre automáticamente el navegador web. La sintaxis larga pero que produce la misma acción es:
+El comando serve se ejecuta en la carpeta donde se haya nuestra aplicación Angular. Al disponer la opción -o se abre automáticamente el navegador web. 
+La sintaxis larga pero que produce la misma acción es:
 
 ng serve --open
 

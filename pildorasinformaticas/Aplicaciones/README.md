@@ -5,6 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Explicación
 
 Proyecto CRUD conectado a firebase y desplegado en este mismo servicio en la siguiente url: https://mis-clientes-1d4b3.web.app/
+https://mis-clientes-1d4b3.firebaseapp.com/home
 
 Ruta protegida contacto, se puede loguear con user: prueba@gmail.com password: prueba
 

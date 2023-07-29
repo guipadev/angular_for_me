@@ -1,18 +1,19 @@
 En las últimas versiones de Angular se le ha dado una responsabilidad fundamental a la herramienta Angular CLI.
 
-Hemos visto que Angular CLI nos permite entre otras cosas:
+Angular CLI nos permite entre otras cosas:
 
-Crear una aplicación de Angular (ng new proyecto001)
-Ejecutar una aplicación Angular en forma local (ng serve -o)
-Crear componentes (ng generate component dado)
-Crear módulos (ng generate module elementos)
-Crear servicios (ng generate service articulos)
-Crear tuberías (ng generate pipe letras)
-Desplegar aplicaciones en producción (ng build)
+- Crear una aplicación de Angular (ng new proyecto001)
+- Ejecutar una aplicación Angular en forma local (ng serve -o)
+- Crear componentes (ng generate component dado)
+- Crear módulos (ng generate module elementos)
+- Crear servicios (ng generate service articulos)
+- Crear pipes(tuberías) (ng generate pipe letras)
+- Desplegar aplicaciones en producción (ng build)
 
-Debe tener siempre a mano la página que contiene la documentación oficial de Angular CLI.
+Tener siempre a mano la página que contiene la documentación oficial de Angular CLI. 
+https://angular.io/cli
 
-Recordemos que en el primer concepto de este curso lo primero que hicimos luego de instalar Node.js es la instalación de Angular.CLI mediante el comando:
+Luego de instalar Node.js es la instalación de Angular.CLI mediante el comando:
 
 npm install -g @angular/cli
 
@@ -21,10 +22,8 @@ Para conocer todos los comandos disponibles de la herramienta Angular.CLI debemo
 
 ng help
 
-Tenemos como resultado muchos de los comandos ya vistos y utilizados en conceptos anteriores:
-
 Angular.CLI comandos
 
-Si por ejemplo queremos ver la versión de Angular.CLI que tenemos instalada en nuestra computadora debemos ejecutar:
+Conocer versión de Angular.CLI que tenemos instalada en nuestra computadora debemos ejecutar:
 
 ng version

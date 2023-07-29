@@ -1,28 +1,27 @@
-Otro comando que hemos utilizado a lo largo de los primeros conceptos de este curso de Angular es 'generate'.
-
 Mediante el comando 'generate' de la herramienta Angular CLI podemos crear:
 
-component
-service
-module
-pipe
-class
-interface
-enum
-directive
-application
-library
-guard
-service-worker
-web-worker
-resolver
-interceptor
-app-shell
+- component
+- service
+- module
+- pipe
+- class
+- interface
+- enum
+- directive
+- application
+- library
+- guard
+- service-worker
+- web-worker
+- resolver
+- interceptor
+- app-shell
 
 ng generate component
 Mediante el comando:
-
+```
 ng generate component dado
+```
 
 Se crea una componente 'dado' con los archivos respectivos y la modificación del archivo del módulo:
 

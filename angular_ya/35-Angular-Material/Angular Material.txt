@@ -1,0 +1,41 @@
+Angular material es un conjunto de componentes visuales que nos permiten desarrollar interfaces de usuario consistentes.
+
+Este conjunto de componentes los desarrolla el mismo equipo de Angular y podemos visitar sus avances en el sitio material.angular.io/
+
+Disponemos de un gran conjunto de componentes:
+
+Autocomplete
+Badge
+Bottom Sheet
+Button
+Button toggle
+Card
+Checkbox
+Chips
+Core
+Datepicker
+Dialog
+Divider
+Expansion Panel
+Form field
+Grid list
+Icon
+Input
+List
+Menu
+Paginator
+Progress bar
+Progress spinner
+Radio button
+Ripples
+Select
+Slider toggle
+Slider
+Snackbar
+Sort header
+Stepper
+Table
+Tabs
+Toolbar
+Tooltip
+Tree

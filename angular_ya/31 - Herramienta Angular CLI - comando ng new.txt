@@ -1,4 +1,4 @@
-Hemos visto que con el comando 'new' de la herramienta Angular CLI se crea un esqueleto de una aplicación Angular:
+Comando 'new' de la herramienta Angular CLI se crea un esqueleto de una aplicación Angular:
 
 ng new proyecto017
 
@@ -10,7 +10,7 @@ Si necesitamos administrar rutas en nuestra aplicación podemos crearla con la s
 
 ng new proyecto017 --routing
 
-Se crea el archivo 'app-routing.module.ts' donde debemos configurar las rutas, tema visto anteriormente.
+Se crea el archivo 'app-routing.module.ts' donde debemos configurar las rutas.
 
 Podemos especificar el prefijo a los selectores generados mediante el parámetro --prefix:
 
