@@ -5,11 +5,10 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { PublicComponent } from './public/public.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [AppComponent, PublicComponent],
+  declarations: [AppComponent],
   imports: [
     RouterModule,
     BrowserModule,

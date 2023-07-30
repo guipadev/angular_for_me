@@ -29,6 +29,6 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    //"disableTypeScriptVersionCheck": true // tsc v 5.0.4 & project desactualizada
+    "disableTypeScriptVersionCheck": true // tsc v 5.0.4 & project desactualizada
   }
 }
