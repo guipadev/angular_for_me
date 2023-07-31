@@ -7,11 +7,17 @@ import { HomeComponent } from './home/containers/home.component';
 import { LoginComponent } from './login/containers/login.component';
 
 @NgModule({
-  imports: [PublicRoutingModule, SharedModule],
-  declarations: [PublicComponent, HomeComponent, LoginComponent],
+  imports: [
+    PublicRoutingModule,
+    SharedModule
+  ],
+  declarations: [
+    PublicComponent,
+    HomeComponent,
+    LoginComponent],
   exports: [],
   providers: [],
 })
 export class PublicModule {
-  constructor() {}
+  constructor() { }
 }
