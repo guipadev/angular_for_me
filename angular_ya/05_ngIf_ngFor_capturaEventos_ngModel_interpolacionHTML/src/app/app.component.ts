@@ -5,11 +5,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'proyecto001';
-  sitio='http://www.google.com';
+  title = 'project 1 al 5';
+  sitio = 'http://www.google.com';
 
-  nombre = '';
-  apellido = '';
+  nombre = 'Charlotte';
+  apellido = 'Lozada';
   edad = 7;
   email = 'rpablo@gmail.com';
   sueldos = [1700, 1600, 1900];
@@ -25,10 +25,10 @@ export class AppComponent {
   ultimos3Sueldos() {
     let suma = 0;
 
-    for(let x = 0; x < this.sueldos.length; x++)
+    for (let x = 0; x < this.sueldos.length; x++)
       suma += this.sueldos[x];
 
-      return suma;
+    return suma;
   }
 
   // Ejemplo para captura de eventos

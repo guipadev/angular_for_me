@@ -1,13 +1,19 @@
 <h1 style="text-align: center">Bienvenido a {{ title }}</h1>
 
 <div>
-  <p>Nombre del Empleado:{{ nombre }}</p>
-  <p>Edad:{{ edad }}</p>
   <p>
-    Los últimos tres sueldos son: {{ sueldos[0] }}, {{ sueldos[1] }} y
+    <strong>Nombre del Empleado:</strong>
+    {{ nombre }}  {{ apellido }}
+  </p>
+  <p>
+    <strong>Edad:</strong>
+    {{ edad }}</p>
+  <p>
+    <strong>Los últimos tres sueldos son:</strong>
+    {{ sueldos[0] }}, {{ sueldos[1] }} y
     {{ sueldos[2] }}
   </p>
-  <p>En los últimos 3 meses ha ganado: {{ ultimos3Sueldos() }}</p>
+  <p><strong>En los últimos 3 meses ha ganado:</strong> {{ ultimos3Sueldos() }}</p>
   <p>{{ esActivo() }}</p>
 
   <!--
@@ -62,7 +68,8 @@ Concepto 'binding' en una dirección
 
 <!--
 Directiva ngModel
-Luego en la vista definimos la directiva ngModel entre corchetes y le asignamos el nombre de la propiedad definida en la clase:
+Luego en la vista definimos la directiva ngModel entre corchetes y le asignamos el nombre de la 
+propiedad definida en la clase:
 
 <input type="text" [ngModel]="nombre">
 

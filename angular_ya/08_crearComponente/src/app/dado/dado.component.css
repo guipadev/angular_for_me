@@ -2,11 +2,12 @@
   width: 5rem;
   height: 5rem;
   font-size: 3rem;
-  color:white;
-  background-color: black;
+  color: salmon;
+  background-color: rgba(34, 44, 26, 0.527);
   border-radius: 1rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin:10px;
+  margin: 10px;
+  border: solid 2px salmon;
 }

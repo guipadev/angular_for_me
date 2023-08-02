@@ -17,7 +17,11 @@
       <td><button (click)="seleccionar(art)">Seleccionar</button></td>
     </tr>
   </table>
-  <ng-template #sinarticulos><p>No hay articulos.</p></ng-template>
+
+  <ng-template #sinarticulos>
+    <p>No hay articulos.</p>
+  </ng-template>
+
   <div>
     <p>Codigo:<input type="number" [(ngModel)]="art.codigo" /></p>
     <p>descripcion:<input type="text" [(ngModel)]="art.descripcion" /></p>
