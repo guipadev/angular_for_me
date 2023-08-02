@@ -13,6 +13,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     HttpClientModule,
     RouterModule,
     CommonModule,
+    MatTabsModule,
+    MatCardModule
   ],
   declarations: [
     NotFoundComponent
