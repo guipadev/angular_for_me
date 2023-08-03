@@ -9,8 +9,8 @@ import { PublicService } from './public.service';
 
 @NgModule({
   imports: [
-    PublicRoutingModule,
-    SharedModule
+    SharedModule,
+    PublicRoutingModule // debe estar siempre al final
   ],
   declarations: [
     PublicComponent,

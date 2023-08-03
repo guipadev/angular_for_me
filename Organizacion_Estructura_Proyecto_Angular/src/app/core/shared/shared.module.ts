@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { LoginBoxComponent } from './components/login-box/login-box.component';
 
 @NgModule({
   imports: [
@@ -17,14 +18,16 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatCardModule
   ],
   declarations: [
+    LoginBoxComponent,
     NotFoundComponent
   ],
-  exports: [
+  exports: [ // Accesible al resto de la app
     HttpClientModule,
     RouterModule,
     CommonModule,
     MatCardModule,
     MatTabsModule,
+    LoginBoxComponent,
     NotFoundComponent
   ],
   providers: [],
