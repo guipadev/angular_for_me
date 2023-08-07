@@ -59,4 +59,65 @@ export class SelectornumericoComponent implements OnInit {
 }
 ```
 
+En la clase SelectornumericoComponent podemos identificar el método que llamaremos desde el HTML template de la componente AppComponent:
 
+```
+  fijar(v:number) {
+    if (v>=this.minimo && v<=this.maximo)
+      this.actual=v;
+  }
+```
+
+Codificamos ahora el archivo 'selectornumerico.component.html':
+
+```
+<div class="selector">
+  <button (click)="decrementar()">-</button>  
+  <div class="valor">{{actual}}</div>
+  <button (click)="incrementar()">+</button>
+</div>
+```
+
+Para definir la hoja de estilo del 'selectornumerico' abrimos el archivo 'selectornumerico.component.css' y codificamos:
+
+```
+.selector {
+  display:inline-flex;
+  margin:0.2rem;
+}
+.valor {
+  display:inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background:#ff0;
+  font-size:2rem;  
+}
+
+button {
+  height: 3rem;
+}
+```
+
+Abrimos ahora el archivo 'app.component.html' y remplazamos su contenido con la definición de un selectornumercio que define una variable local y tres botones que llaman a partir de esa variable al método definido dentro del selectornumerico:
+
+```
+<div>
+  <app-selectornumerico [minimo]="1" [maximo]="10" #selector1></app-selectornumerico>
+  <br>
+  <button (click)="selector1.fijar(1)">Fijar en 1</button><br>
+  <button (click)="selector1.fijar(5)">Fijar en 5</button><br>
+  <button (click)="selector1.fijar(10)">Fijar en 10</button>
+</div>
+```
+
+Mediante dos botones definidos en la componente AppComponent podemos llamar al método fijar de la clase SelectornumericoComponent gracias a que definimos la variable #selector1:
+
+```
+  <app-selectornumerico [minimo]="1" [maximo]="10"  #selector1></app-selectornumerico>
+  <br>
+  <button (click)="selector1.fijar(1)">Fijar en 1</button><br>
+  <button (click)="selector1.fijar(5)">Fijar en 5</button><br>
+  <button (click)="selector1.fijar(10)">Fijar en 10</button>
+```
