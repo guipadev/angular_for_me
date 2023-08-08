@@ -9,9 +9,10 @@ export class SelectornumericoComponent implements OnInit {
 
   @Input() minimo: number = 1;
   @Input() maximo: number = 1;
+
   actual: number = 1;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
 
@@ -29,7 +30,7 @@ export class SelectornumericoComponent implements OnInit {
       this.actual--;
   }
 
-  fijar(v:number) {
+  fijar(v: number) {
     if (v >= this.minimo && v <= this.maximo)
       this.actual = v;
   }
