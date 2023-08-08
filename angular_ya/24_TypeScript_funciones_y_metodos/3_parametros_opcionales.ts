@@ -1,17 +1,18 @@
 /*
 Parámetros opcionales.
-En TypeScript debemos agregar el caracter '?' al nombre del parámetro para indicar que el mismo puede o no llegar un dato:
+En TypeScript debemos agregar el caracter '?' al nombre del parámetro para indicar 
+que el mismo puede o no llegar un dato:
 */
 
-function sumar(valor1:number, valor2:number, valor3?:number):number {
+function sumar(valor1: number, valor2: number, valor3?: number): number {
   if (valor3)
-    return valor1+valor2+valor3;
+    return valor1 + valor2 + valor3;
   else
-    return valor1+valor2;
+    return valor1 + valor2;
 }
 
-console.log(sumar(5,4));
-console.log(sumar(5,4,3));
+console.log(sumar(5, 4));
+console.log(sumar(5, 4, 3));
 
 //El tercer parámetro es opcional:
 //Luego a la función 'sumar' la podemos llamar pasando 2 o 3 valores numéricos:
