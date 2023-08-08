@@ -1,27 +1,182 @@
-# Proyecto010
+# 15 - Petición de un archivo JSON a un servidor
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
+Cuando tenemos que hacer peticiones de archivos JSON a un servidor en Angular disponemos de una clase llamada 'HttpClient' que nos facilita ésta actividad.
 
-## Development server
+Para hacer uso de la clase 'HttpClient' debemos importar el módulo 'HttpClientModule'.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Problema
+Confeccionar una aplicación que recupere una respuesta en JSON de la dirección:
 
-## Code scaffolding
+```https://scratchya.com.ar/vue/datos.php```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+La estructura del archivo JSON es:
 
-## Build
+```
+[
+  {
+    "codigo": 1,
+    "descripcion": "papas",
+    "precio": 12.33
+  },
+  {
+    "codigo": 2,
+    "descripcion": "manzanas",
+    "precio": 54
+  }
+]
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Mostrar en una tabla HTML todos los artículos recuperados.
 
-## Running unit tests
+Desde la línea de comandos de Node.js procedemos a crear el proyecto010:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+f:\angularya> ng new proyecto010
+Como primer paso importaremos el módulo HttpClientModule en el archivo app.module.ts:
 
-## Running end-to-end tests
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+import {HttpClientModule} from '@angular/common/http';
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+Implementaremos toda la lógica de lectura de datos en la componente por defecto que ha creado Angular CLI, luego en conceptos futuros veremos como distribuir las responsabilidades entre distintas clases.
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  articulos: any;
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    this.http.get("https://scratchya.com.ar/vue/datos.php")
+      .subscribe(
+        resultado => {
+          this.articulos = resultado;
+        }
+      );
+  }
+
+} 
+Importamos la clase HttpClient:
+
+import { HttpClient } from '@angular/common/http';
+Definimos un atributo llamado articulos de tipo 'any':
+
+  articulos: any;
+En Angular podemos definir una propiedad en los parámetros del constructor que se inyecta cuando se crea la componente:
+
+  constructor(private http: HttpClient) { }
+Luego la propiedad http que es de la clase HttpClient nos servirá para hacer la petición al servidor.
+
+En el método onInit que se ejecuta una vez que el template de la componente está creado procedemos a recuperar del servidor los datos llamando al método get de la propiedad http:
+
+    this.http.get("https://scratchya.com.ar/vue/datos.php")
+      .subscribe(
+        resultado => {
+          this.articulos = resultado;
+        }
+      );
+A partir del objeto que retorna el método get llamamos al método subscribe y le pasamos una función anónima. Recibe como parámetro los datos recuperados del servidor.
+
+Falta que veamos como en la vista procedemos a mostrar los datos recuperados 'app.component.html':
+
+<div *ngIf="articulos!=null; else espera">
+  <table border="1">
+    <tr>
+      <td>Codigo</td><td>Descripcion</td><td>Precio</td>
+    </tr>
+    <tr *ngFor="let art of articulos">
+      <td>{{art.codigo}}</td>
+      <td>{{art.descripcion}}</td>
+      <td>{{art.precio}}</td>
+    </tr>
+  </table>
+</div>
+<ng-template #espera>Esperando datos...</ng-template>
+Como las peticiones JSON a un servidor pueden demorarse un tiempo mediante la directiva *ngIf verificamos si la variable articulos tiene un null procedemos a mostrar el contenido de la etiqueta 'ng-template':
+
+<div *ngIf="articulos!=null; else espera">
+Para mostrar los datos de la propiedad 'articulos' lo hacemos como lo hemos visto anteriormente:
+
+  <table border="1">
+    <tr>
+      <td>Codigo</td><td>Descripcion</td><td>Precio</td>
+    </tr>
+    <tr *ngFor="let art of articulos">
+      <td>{{art.codigo}}</td>
+      <td>{{art.descripcion}}</td>
+      <td>{{art.precio}}</td>
+    </tr>
+  </table>
+
+
+## Problema
+Modificar el problema anterior y hacer una petición del API de Covid19 que nos suministra la url:
+
+https://api.covid19api.com/summary
+La misma nos retorna un objeto que contiene un atributo llamado 'Countries' con los datos de la enfermedad recopilada en 193 paises.
+
+El archivo 'app.component.ts' queda con el siguiente código:
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  paises: any;
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    this.http.get("https://api.covid19api.com/summary")
+      .subscribe(
+        resultado => {
+          this.paises = resultado;
+          
+        }
+      );
+  }
+
+} 
+La lógica es completamente idéntica al problema anterior.
+
+Luego para mostrar los datos en la página recorremos el vector en el archivo 'app.component.html':
+
+<div *ngIf="paises!=null; else espera">
+  <table border="1">
+    <tr>
+      <td>Pais</td><td>Total de casos</td><td>Total de muertos</td>
+    </tr>
+    <tr *ngFor="let pais of paises.Countries">
+      <td>{{pais.Country}}</td>
+      <td>{{pais.TotalConfirmed}}</td>
+      <td>{{pais.TotalDeaths}}</td>
+    </tr>
+  </table>
+</div>
+<ng-template #espera>Esperando datos...</ng-template>
+Para entender porqué disponemos paises.Countries debemos conocer la estructura de datos que nos retorna el servidor.
