@@ -3,7 +3,7 @@ Parámetros de métodos.
 También cuando definimos funciones o métodos debemos definir el tipo de dato de los mismos:
 */
 
-mayor(valor1: number, valor2: number): number {
+function mayor(valor1: number, valor2: number): number {
     if (valor1 > valor2)
         return valor1;
     else
@@ -22,9 +22,9 @@ export class AppComponent {
     constructor() {
         this.mostrarMensaje('Hola mundo');
     }
-  
+
     mostrarMensaje(mensaje: string): void {
-      alert(mensaje);
+        alert(mensaje);
     }
-  
-  }
+
+}
