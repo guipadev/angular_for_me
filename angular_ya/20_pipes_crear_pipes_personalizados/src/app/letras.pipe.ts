@@ -21,13 +21,17 @@ Veamos la lógica como implementar la pipe que transforme un valor entero compre
 export class LetrasPipe implements PipeTransform {
 
   /**
-   * El parámetro 'value' recibe el valor que debe procesar la pipe. El parámetro 'args' puede no llegar en dicho caso almacena un null.
-   * Si en 'args' llega un null luego ejecuta el último switch de la función retornando en castellano el número almacenado en 'value'.
+   * El parámetro 'value' recibe el valor que debe procesar la pipe. 
+   * El parámetro 'args' puede no llegar en dicho caso almacena un null.
+   * Si en 'args' llega un null luego ejecuta el último switch de la función retornando 
+   * en castellano el número almacenado en 'value'.
    */
 
   transform(value: any, args?: any): any {
+
     if (args != null) {
-      if (args=='ingles')
+
+      if (args == 'ingles')
         switch (value) {
           case 1: return 'one';
           case 2: return 'two';
@@ -37,7 +41,8 @@ export class LetrasPipe implements PipeTransform {
           case 6: return 'six';
           case 7: return 'seven';
         }
-        if (args=='portugues')
+
+      if (args == 'portugues')
         switch (value) {
           case 1: return 'um';
           case 2: return 'dois';
@@ -48,6 +53,7 @@ export class LetrasPipe implements PipeTransform {
           case 7: return 'sete';
         }
     }
+
     switch (value) {
       case 1: return 'uno';
       case 2: return 'dos';
@@ -57,6 +63,7 @@ export class LetrasPipe implements PipeTransform {
       case 6: return 'seis';
       case 7: return 'siete';
     }
+
     return null;
   }
 }
