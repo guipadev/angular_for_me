@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/swiper/swiper-bundle.css';
+@import "../node_modules/swiper/swiper.css";
+@import "../node_modules/swiper/modules/navigation.css";
+@import "../node_modules/swiper/modules/pagination.css";
+
+
+body {
+    margin: 0 0 var(--header-height) 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    color: var(--text-color);
+    transition: 0.5s;
+}
+
+/*
+section#home {
+    height: calc(100vh - var(--header-height));
+}
+*/

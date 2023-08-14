@@ -8,7 +8,7 @@ import { ServiceComponent } from './service/service.component';
 import { QualificationComponent } from './qualification/qualification.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ProjectComponent } from './project/project.component';
-import { TestimonialsComponent } from './testimonials/testimonials.component';
+import { TestimonialComponent } from './testimonials/testimonials.component';
 import { ContactComponent } from './contact/contact.component';
 
 
@@ -22,7 +22,7 @@ import { ContactComponent } from './contact/contact.component';
     QualificationComponent,
     PortfolioComponent,
     ProjectComponent,
-    TestimonialsComponent,
+    TestimonialComponent,
     ContactComponent
   ],
   imports: [
@@ -36,7 +36,7 @@ import { ContactComponent } from './contact/contact.component';
     QualificationComponent,
     PortfolioComponent,
     ProjectComponent,
-    TestimonialsComponent,
+    TestimonialComponent,
     ContactComponent
   ]
 })
