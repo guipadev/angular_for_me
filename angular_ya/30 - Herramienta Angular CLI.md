@@ -1,3 +1,5 @@
+# 30 - Herramienta Angular CLI
+
 En las últimas versiones de Angular se le ha dado una responsabilidad fundamental a la herramienta Angular CLI.
 
 Angular CLI nos permite entre otras cosas:
@@ -15,15 +17,15 @@ https://angular.io/cli
 
 Luego de instalar Node.js es la instalación de Angular.CLI mediante el comando:
 
-npm install -g @angular/cli
+```npm install -g @angular/cli```
 
 Comandos útiles de Angular.CLI
 Para conocer todos los comandos disponibles de la herramienta Angular.CLI debemos ejecutar:
 
-ng help
+```ng help```
 
 Angular.CLI comandos
 
 Conocer versión de Angular.CLI que tenemos instalada en nuestra computadora debemos ejecutar:
 
-ng version
+```ng version```

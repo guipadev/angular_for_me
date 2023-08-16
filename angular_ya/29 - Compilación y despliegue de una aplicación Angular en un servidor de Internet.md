@@ -1,9 +1,10 @@
 # Compilación y despliegue de una aplicación Angular en un servidor de Internet
 
-Cuando uno desarrolla una aplicación web utilizando el framework de Angular lo desarrolla y prueba en forma local. Cada cambio que desarrolla lo puede probar en forma local ejecutando el servidor de desarrollo que trae Angular:
+Cuando uno desarrolla una aplicación web utilizando el framework de Angular lo desarrolla y prueba en forma local. 
+Cada cambio que desarrolla lo puede probar en forma local ejecutando el servidor de desarrollo que trae Angular:
 
 ```
-f:\angularya\proyecto016>ng serve -o
+ng serve -o
 ```
 
 Una vez finalizada la aplicación debemos subirla a nuestro servidor real en Internet, para esto debemos ejecutar el siguiente comando de Angular CLI:
@@ -33,5 +34,5 @@ http://scratchya.com.ar/angular/proyecto016/
 
 El proceso de compilación debe ser:
 ```
-f:\angularya\proyecto016>ng build --base-href=/angular/proyecto016/
+ng build --base-href=/angular/proyecto016/
 ```
