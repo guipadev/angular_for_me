@@ -137,7 +137,7 @@ Para que la etiqueta HTML sea afectado por Material debemos agregar la propiedad
 
 ```<button mat-raised-button (click)="presion(0,0)" class="casilla">{{posiciones[0][0]}}</button>```
 
-Otro estilo de botón se logra mediante la propiedad ''mat-button' (no se muestran los bordes del botón):
+Otro estilo de botón se logra mediante la propiedad 'mat-button' (no se muestran los bordes del botón):
 
 ```<button mat-button color="primary" (click)="reiniciar()">Reiniciar</button>```
 
