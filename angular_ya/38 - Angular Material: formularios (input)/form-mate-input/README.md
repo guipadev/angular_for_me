@@ -1,27 +1,132 @@
-# FormMateInput
+# 38 - Angular Material: formularios (input)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+Entre los grupos de componentes fundamentales en Angular Material tenemos los referentes a formularios.
+Recordemos que la documentación oficial sobre los controles lo podemos encontrar en Componentes en Angular Material (https://material.angular.io/components/categories)
 
-## Development server
+Confeccionaremos una pequeña aplicación para internalizar los pasos en el desarrollo con Angular Material y sus formularios.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Problema
+Definir un formulario web que permita cargar dos valores numéricos y al presionar un botón mostrar su suma.
 
-## Code scaffolding
+- Crearemos primero el proyecto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```ng new proyecto020```
 
-## Build
+- Procedemos a instalar todas las dependencias de Angular Material ayudados por Angular CLI mediante el comando 'add':
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ng add @angular/material```
 
-## Running unit tests
+- Modificamos el archivo 'app.module.ts' donde debemos importar los módulos de Angular Material que requiere nuestro proyecto:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-## Running end-to-end tests
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    FormsModule ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-## Further help
+- Modificamos el archivo 'app.component.ts' con la lógica de nuestra componente que permite sumar dos números ingresados por teclado:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  valor1=0;
+  valor2=0;
+  resultado=0;
+
+  sumar() {
+    this.resultado = this.valor1 + this.valor2;
+  }
+}
+```
+
+- Codificamos la interfaz visual en el archivo 'app.component.html':
+
+```
+<div class="contenedor">
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="valor1" type="number" placeholder="Ingrese primer valor">
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput [(ngModel)]="valor2" type="number" placeholder="Ingrese segundo valor">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="sumar()">Sumar</button>
+  <p>La suma de los dos valores es:{{resultado}}</p>
+
+</div>
+```
+
+- El último archivo que debemos codificar es la hoja de estilo de la componente que se encuentra en 'app.component.css':
+
+```
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    margin:1rem auto;
+    max-width: 600px;
+}
+```
+
+- Si ejecutamos ahora la aplicación podemos comprobar cual es la estética de los controles de formulario de Angular Material:
+
+- Si analizamos primero el HTML debemos agregar la directiva matInput en la etiqueta 'input', además de encerrar entre las marcas 'mat-form-field':
+
+```
+  <mat-form-field>
+    <input matInput [(ngModel)]="valor1" type="number" placeholder="Ingrese primer valor">
+  </mat-form-field>
+```
+
+El contenido de la propiedad placeholder es la que utiliza Angular Material para mostrar en la parte superior.
+
+Los botones ya lo vimos en conceptos anteriores, recordemos que debemos disponer la directiva mat-raised-button:
+
+```<button mat-raised-button color="primary" (click)="sumar()">Sumar</button>```
+
+El otro paso que no debemos olvidar es importar los módulos de Angular Material en el archivo 'app.module.ts'.
+
+## Acotaciones
+
+Hemos utilizado la etiqueta 'input' asignado a la propiedad type el valor 'number', los valores posibles para la propiedad type son:
+
+- color
+- date
+- datetime-local
+- email
+- month
+- number
+- password
+- search
+- tel
+- text
+- time
+- url
+- week

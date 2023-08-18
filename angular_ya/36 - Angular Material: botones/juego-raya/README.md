@@ -1,27 +1,154 @@
-# JuegoRaya
+# 36 - Angular Material: botones
+Es muy importante cuando trabajamos con Angular Material tener la documentación oficial de esta librería de componentes.
+Debemos acceder a Componentes en Angular Material (https://material.angular.io/components/categories)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+La etiqueta 'button' de HTML es afectada por esta librería, veremos que pasos debemos dar para utilizar 'button' con Material.
 
-## Development server
+## Problema
+Crear un tablero de Ta Te Ti con etiquetas 'button', afectar dichos controles con Material.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Crearemos primero el proyecto
 
-## Code scaffolding
+```ng new proyecto019```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Procedemos a instalar todas las dependencias de Angular Material ayudados por Angular CLI mediante el comando 'add':
 
-## Build
+```ng add @angular/material```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Modificamos el archivo 'app.module.ts' para indicar que utilizaremos el módulo 'MatButtonModule':
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-## Running unit tests
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+import { MatButtonModule } from '@angular/material/button';
 
-## Running end-to-end tests
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Luego en la componente principal implementamos la interfaz visual y la lógica del juego del Ta Te Ti.
 
-## Further help
+El archivo 'app.component.ts':
+```
+import { Component } from '@angular/core';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  posiciones=[['-','-','-'],
+              ['-','-','-'],
+              ['-','-','-']];
+  jugador='O';
+
+
+  presion(fila:number,columna:number) {
+    if (this.posiciones[fila][columna]=='-') {
+      this.posiciones[fila][columna]=this.jugador;
+      this.verificarGano('X');
+      this.verificarGano('O');
+      this.cambiarJugador();
+    }
+  }
+
+  reiniciar() {
+    for(let f=0;f<3;f++)
+      for(let c=0;c<3;c++)
+        this.posiciones[f][c]='-';
+  }
+
+  cambiarJugador() {
+    if (this.jugador=='O')
+      this.jugador='X';
+    else
+      this.jugador='O';
+  }
+
+
+  verificarGano(ficha: string) {
+    if (this.posiciones[0][0]==ficha && this.posiciones[0][1]==ficha && this.posiciones[0][2]==ficha)
+      alert('Gano:'+ficha);
+    if (this.posiciones[1][0]==ficha && this.posiciones[1][1]==ficha && this.posiciones[1][2]==ficha)
+      alert('Gano:'+ficha);
+    if (this.posiciones[2][0]==ficha && this.posiciones[2][1]==ficha && this.posiciones[2][2]==ficha)
+      alert('Gano:'+ficha);
+    if (this.posiciones[0][0]==ficha && this.posiciones[1][0]==ficha && this.posiciones[2][0]==ficha)
+      alert('Gano:'+ficha);
+    if (this.posiciones[0][1]==ficha && this.posiciones[1][1]==ficha && this.posiciones[2][1]==ficha)
+      alert('Gano:'+ficha);
+    if (this.posiciones[0][2]==ficha && this.posiciones[1][2]==ficha && this.posiciones[2][2]==ficha)
+      alert('Gano:'+ficha);
+    if (this.posiciones[0][0]==ficha && this.posiciones[1][1]==ficha && this.posiciones[2][2]==ficha)
+      alert('Gano:'+ficha);
+    if (this.posiciones[0][2]==ficha && this.posiciones[1][1]==ficha && this.posiciones[2][0]==ficha)
+      alert('Gano:'+ficha);
+  }
+}
+```
+
+El template de la componente lo tenemos en el archivo 'app.component.html':
+```
+<div style="text-align: center">
+  <button mat-raised-button (click)="presion(0,0)" class="casilla">{{posiciones[0][0]}}</button>
+  <button mat-raised-button (click)="presion(0,1)" class="casilla">{{posiciones[0][1]}}</button>
+  <button mat-raised-button (click)="presion(0,2)" class="casilla">{{posiciones[0][2]}}</button>
+  <br>
+  <button mat-raised-button (click)="presion(1,0)" class="casilla">{{posiciones[1][0]}}</button>
+  <button mat-raised-button (click)="presion(1,1)" class="casilla">{{posiciones[1][1]}}</button>
+  <button mat-raised-button (click)="presion(1,2)" class="casilla">{{posiciones[1][2]}}</button>
+  <br>
+  <button mat-raised-button (click)="presion(2,0)" class="casilla">{{posiciones[2][0]}}</button>
+  <button mat-raised-button (click)="presion(2,1)" class="casilla">{{posiciones[2][1]}}</button>
+  <button mat-raised-button (click)="presion(2,2)" class="casilla">{{posiciones[2][2]}}</button>
+</div>
+<div style="text-align: center">
+  <button mat-button color="primary" (click)="reiniciar()">Reiniciar</button>
+</div>
+```
+
+El archivo de la hoja de estilo de la componente 'app.component.css':
+```
+.casilla {
+    height: 5rem;
+    margin: 0.5rem;
+    font-size: 3rem;
+}
+```
+
+Si ejecutamos la aplicación podemos ver que las etiquetas 'button' están afectados por Material:
+
+Para que la etiqueta HTML sea afectado por Material debemos agregar la propiedad 'mat-raised-button':
+
+```<button mat-raised-button (click)="presion(0,0)" class="casilla">{{posiciones[0][0]}}</button>```
+
+Otro estilo de botón se logra mediante la propiedad 'mat-button' (no se muestran los bordes del botón):
+
+```<button mat-button color="primary" (click)="reiniciar()">Reiniciar</button>```
+
+## Acotaciones
+Hay otras variantes de botones en Material:
+
+1. mat-button
+2. mat-raised-button
+3. mat-stroked-button
+4. mat-fab (Floating Action Button)
+5. mat-mini-fab
+
+Hemos utilizado la etiqueta 'button' para definir acciones dentro de nuestra aplicación.
+Si lo que necesitamos es navegar a otra vista utilizaremos la etiqueta 'a' que perfectamente podemos aplicar las propiedades vistas para la etiqueta 'button'.

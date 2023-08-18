@@ -1,27 +1,97 @@
-# MateFormSlider
+# 42 - Angular Material: formularios - mat-slider
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+Veremos ahora la componente mat-slider que provee la misma funcionalidad de la etiqueta nativa de HTML <input type="range"> pero con las ventajas de estilos y animaciones de Material Design.
 
-## Development server
+## Problema
+Definir tres controles mat-slider con valores que varíen entre 1 y 200. Mostrar la suma de los tres slider.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Crearemos primero el proyecto
+```
+ng new proyecto024
+```
 
-## Code scaffolding
+Procedemos a instalar todas las dependencias de Angular Material ayudados por Angular CLI mediante el comando 'add':
+```
+ng add @angular/material
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Modificamos el archivo 'app.module.ts' donde debemos importar los módulos de Angular Material que requiere nuestro proyecto:
 
-## Build
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-## Running unit tests
+import { FormsModule } from '@angular/forms';
+import { MatSliderModule } from '@angular/material/slider';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatSliderModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Como vemos aparece el nuevo módulo MatSliderModule.
 
-## Further help
+Modificamos el archivo 'app.component.ts' :
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  slider1=0;
+  slider2=0;
+  slider3=0;
+  suma=0;
+
+  cambiar() {
+    this.suma = this.slider1 + this.slider2 + this.slider3;
+  }
+
+}
+```
+
+Codificamos la interfaz visual en el archivo 'app.component.html':
+
+```
+<mat-slider [(ngModel)]="slider1" thumbLabel (change)="cambiar()" min="1" max="200"></mat-slider><br>
+<mat-slider [(ngModel)]="slider2" thumbLabel (change)="cambiar()" min="1" max="200"></mat-slider><br>
+<mat-slider [(ngModel)]="slider3" thumbLabel (change)="cambiar()" min="1" max="200"></mat-slider><br>
+```
+
+La suma de los tres slider:{{suma}}
+
+Si ejecutamos ahora la aplicación podemos comprobar cual es la estética de la componente mat-slider:
+
+En el archivo 'app.component.html' definimos los tres selectores 'mat-slider' :
+
+```
+<mat-slider [(ngModel)]="slider1" thumbLabel (change)="cambiar()" min="1" max="200"></mat-slider><br>
+<mat-slider [(ngModel)]="slider2" thumbLabel (change)="cambiar()" min="1" max="200"></mat-slider><br>
+<mat-slider [(ngModel)]="slider3" thumbLabel (change)="cambiar()" min="1" max="200"></mat-slider><br>
+```
+
+En el archivo 'app.module.ts' importamos todos los módulos necesarios:
+
+```
+import { FormsModule } from '@angular/forms';
+import { MatSliderModule } from '@angular/material/slider';
+```

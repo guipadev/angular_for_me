@@ -1,27 +1,137 @@
-# LayoutTabs
+# 44 - Angular Material: Layout - tabs
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+Angular material nos permite organizar vistas que se hacen visibles mediante distintas pestañas:
 
-## Development server
+El título de cada pestaña se muestra en el encabezado y la pestaña activa tiene una barra distinta:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Cuando la lista de etiquetas de pestañas excede el ancho del encabezado, los controles de paginación aparecen para permitir al usuario desplazarse hacia la izquierda y hacia la derecha a través de las etiquetas:
 
-## Code scaffolding
+Para el empleo de las pestañas necesitamos las etiquetas mat-tab-group y dentro de esta mat-tab por cada pestaña.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Problema
+Mostrar tres pestañas con los datos de tres países.
 
-## Build
+Crearemos primero el proyecto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ng new proyecto026```
 
-## Running unit tests
+Procedemos a instalar todas las dependencias de Angular Material ayudados por Angular CLI mediante el comando 'add':
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```ng add @angular/material```
 
-## Running end-to-end tests
+Modificamos el archivo 'app.module.ts' donde debemos importar MatTabsModule:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-## Further help
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+import { MatTabsModule } from '@angular/material/tabs';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatTabsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Codificamos la interfaz visual en el archivo 'app.component.html':
+
+```
+<mat-tab-group>
+  <mat-tab label="Argentina">
+    <div class="datos">
+      <p>
+        <strong>Nombre del país:</strong>Argentina
+      </p>
+      <p>
+        <img src="assets/imagenes/argentina.png">
+      </p>
+      <h3>Datos generales.</h3>
+      <p>Argentina, llamada oficialmente República Argentina, es un país soberano de América del Sur, ubicado en el extremo
+        sur y sudeste de dicho subcontinente. Adopta la forma de gobierno republicana, democrática, representativa y federal.</p>
+      <p>La Argentina está organizada como un Estado federal descentralizado, integrado desde 1994 por un Estado nacional y
+        24 estados autogobernados, siendo estos sus 23 provincias sumada la ciudad autónoma de Buenos Aires designada
+        como Capital Federal del país. Cada estado tiene autonomía política, constitución, bandera y cuerpo de seguridad
+        propios. Las 23 provincias mantienen todos los poderes no delegados al Estado nacional y garantizan la autonomía
+        de sus municipios.</p>
+    </div>
+  </mat-tab>
+  <mat-tab label="Chile">
+    <div class="datos">
+      <p>
+        <strong>Nombre del país:</strong>Chile
+      </p>
+      <p>
+        <img src="assets/imagenes/chile.png">
+      </p>
+      <h3>Datos generales.</h3>
+      <p>Chile es un país de América ubicado en el extremo sudoeste de América del Sur. Su nombre oficial es República de Chile
+        y su capital es la ciudad de Santiago. Primer país sudamericano en ingresar a la Organización para la Cooperación
+        y el Desarrollo Económicos, Chile es una de las economías de América Latina que más ha crecido desde mediados de
+        la década de 1980.</p>
+      <p>Antes del descubrimiento de América, las tierras situadas al sur del desierto de Atacama ya se llamaban Chili en la
+        tradición indígena. Una vez instalados en Nueva Castilla y Nueva Toledo, los conquistadores españoles siguieron
+        llamando de esa forma a la región del sur, a veces también conocida como «valle de Chile», nombre que se extendió
+        posteriormente a todo el actual país.</p>
+    </div>
+  </mat-tab>
+  <mat-tab label="Uruguay">
+    <div class="datos">
+      <p>
+        <strong>Nombre del país:</strong>Uruguay
+      </p>
+      <p>
+        <img src="assets/imagenes/uruguay.png">
+      </p>
+      <h3>Datos generales.</h3>
+      <p>Uruguay, oficialmente República Oriental del Uruguay, es un país de América del Sur, situado en la parte oriental del
+        Cono Sur americano. Limita al noreste con Brasil —estado de Río Grande del Sur—, al oeste con Argentina —provincias
+        de Entre Ríos y Corrientes— y tiene costas en el océano Atlántico al sureste y sobre el Río de la Plata hacia el
+        sur. Abarca 176?215 km² y es el segundo país más pequeño de Sudamérica, después de Surinam.1? Según los datos del
+        último censo del INE en 2011, la población de Uruguay es de 3.290.454 habitantes, por lo que figura en la décima
+        posición entre los países sudamericanos.Uruguay, oficialmente República Oriental del Uruguay, es un país de América
+        del Sur, situado en la parte oriental del Cono Sur americano. Limita al noreste con Brasil —estado de Río Grande
+        del Sur—, al oeste con Argentina —provincias de Entre Ríos y Corrientes— y tiene costas en el océano Atlántico al
+        sureste y sobre el Río de la Plata hacia el sur. Abarca 176?215 km² y es el segundo país más pequeño de Sudamérica,
+        después de Surinam.1? Según los datos del último censo del INE en 2011, la población de Uruguay es de 3.290.454 habitantes,
+        por lo que figura en la décima posición entre los países sudamericanos.
+      </p>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+```
+
+Agregamos las tres imágenes de las banderas en una carpeta llamada imagenes que se debe crear dentro de la carpeta 'assets':
+
+```
+    <img src="assets/imagenes/uruguay.png">
+```
+
+La estructura fundamental del archivo HTML para definir las pestañas es:
+
+```
+<mat-tab-group>
+  <mat-tab label="Argentina">
+    <p>datos</p>
+  </mat-tab>
+  <mat-tab label="Chile">
+    <p>datos</p>
+  </mat-tab>
+  <mat-tab label="Uruguay">
+    <p>datos</p>
+  </mat-tab>
+</mat-tab-group>
+```
+
+El valor almacenado en la propiedad label de la etiqueta 'mat-tab' es lo que se muestra como título de la pestaña.

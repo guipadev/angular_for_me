@@ -1,27 +1,179 @@
-# FiltroTabla
+# 48 - Angular Material: Tablas - mat-table y filtrar datos
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+Hay que tener en cuenta que no existe una componente especial o selector para filtrar datos de una tabla.
+Para resolver este problema debemos implementar nosotros el filtrado de datos en forma manual.
 
-## Development server
+## Problema
+Mostrar un listado de artículos ficticios(codigo, descripción y precio), permitir filtrar todos los datos según un string
+que carguemos en una componente mat-input.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Crearemos primero el proyecto
 
-## Code scaffolding
+```ng new proyecto030```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Procedemos a instalar todas las dependencias de Angular Material ayudados por Angular CLI mediante el comando 'add':
 
-## Build
+```ng add @angular/material```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Modificamos el archivo 'app.module.ts' donde debemos importar MatTableModule y MatInputModule:
 
-## Running unit tests
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+import { AppComponent } from './app.component';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
 
-## Running end-to-end tests
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    MatTableModule,
+    BrowserAnimationsModule,
+    MatInputModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Modificamos el archivo 'app.component.ts' con la lógica de nuestra componente:
 
-## Further help
+```
+import { Component, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  columnas: string[] = ['codigo', 'descripcion', 'precio'];
+
+  datos: Articulo[] = [new Articulo(1, 'papas', 55),
+  new Articulo(2, 'manzanas', 53),
+  new Articulo(3, 'naranjas', 25),
+  ];
+
+  dataSource:any;
+
+  ngOnInit() {
+    this.dataSource = new MatTableDataSource(this.datos);
+  }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  }
+}
+
+export class Articulo {
+  constructor(public codigo: number, public descripcion: string, public precio: number) {
+  }
+}
+```
+
+En este archivo importamos la clase:
+
+```
+import { MatTableDataSource } from '@angular/material/table';
+```
+
+definimos un método llamado 'filtrar' que se ejecuta cada vez que el usuario ingresa o borra un caracter en el control mat-input:
+
+```
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  }
+```
+
+Cuando iniciamos la propiedad 'filter' de dataSource, se actualizan los datos que se mostrarán en la vista.
+
+La clase 'Articulo' se la declaró después de la clase 'AppComponent':
+
+```
+export class Articulo {
+  constructor(public codigo: number, public descripcion: string, public precio: number) {
+  }
+}
+```
+
+Codificamos la interfaz visual en el archivo 'app.component.html':
+
+```
+<mat-form-field>
+  <mat-label>Buscar</mat-label>
+  <input matInput (keyup)="filtrar($event)" placeholder="buscar">
+</mat-form-field>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="codigo">
+      <th mat-header-cell *matHeaderCellDef> Código </th>
+      <td mat-cell *matCellDef="let articulo"> {{articulo.codigo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef> Descripción </th>
+      <td mat-cell *matCellDef="let articulo"> {{articulo.descripcion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="precio">
+      <th mat-header-cell *matHeaderCellDef> Precio </th>
+      <td mat-cell *matCellDef="let articulo"> {{articulo.precio}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+  </table>
+</div>
+```
+
+Creamos un cuadro de entrada de datos y fijamos para el evento 'keyup' la ejecución del método 'filtrar':
+
+```
+<mat-form-field>
+  <mat-label>Buscar</mat-label>
+  <input matInput (keyup)="filtrar($event)" placeholder="buscar">
+</mat-form-field>
+```
+
+Para mostrar la tabla de datos hacemos lo que ya conocemos:
+
+```
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="codigo">
+      <th mat-header-cell *matHeaderCellDef> Código </th>
+      <td mat-cell *matCellDef="let articulo"> {{articulo.codigo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef> Descripción </th>
+      <td mat-cell *matCellDef="let articulo"> {{articulo.descripcion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="precio">
+      <th mat-header-cell *matHeaderCellDef> Precio </th>
+      <td mat-cell *matCellDef="let articulo"> {{articulo.precio}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+  </table>
+```
+
+la hoja de estilo de la componente 'app.component.css':
+
+```
+table {
+    width: 100%;
+ }
+```
