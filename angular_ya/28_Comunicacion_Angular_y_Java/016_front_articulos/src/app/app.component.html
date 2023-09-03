@@ -22,7 +22,46 @@
             Borrar
           </button>
         </td>
+        <td><h1>Formulario Productos</h1>
+<div class="flexbox-container tablita">
+  <div>
+    <table border="1" *ngIf="hayRegistros(); else sinarticulos">
+      <tr>
+        <td>Codigo</td>
+        <td>Descripcion</td>
+        <td>Precio</td>
+        <td>Borrar</td>
+        <td>Seleccionar</td>
+      </tr>
+
+      <tr *ngFor="let articulo of articulos">
+        <td>{{ articulo.codigo }}</td>
+        <td>{{ articulo.descripcion }}</td>
+        <td>{{ articulo.precio }}</td>
         <td>
+          <button
+            (click)="eliminarArticulo(articulo.codigo)"
+            class="custom-btn btn-5"
+          >
+            Borrar
+          </button>
+        </td>
+        <td>
+          <button
+            (click)="obtenerArticuloPorId(articulo.codigo)"
+            class="custom-btn btn-7"
+          >
+            Seleccionar
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <ng-template #sinarticulos>
+    <p>No hay articulos.</p>
+  </ng-template>
+
           <button
             (click)="obtenerArticuloPorId(articulo.codigo)"
             class="custom-btn btn-7"
