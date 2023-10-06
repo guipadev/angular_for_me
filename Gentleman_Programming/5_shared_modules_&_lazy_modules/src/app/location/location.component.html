@@ -1,0 +1,9 @@
+<div class="location">
+  <app-breadcrum [title]="'locations'" [titleButton]="'Characteres'">
+  </app-breadcrum>
+  <ul>
+    <li *ngFor="let location of locations">
+      {{ location.name }}
+    </li>
+  </ul>
+</div>
