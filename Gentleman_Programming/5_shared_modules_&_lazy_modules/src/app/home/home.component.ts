@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Character } from './models/character.model';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,15 @@ import { ApiService } from '../api.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  characters = [];
+  // Usamos la clase Character para tipar characters
+  characters: Character[] = [];
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
     this.apiService.getCharacters().subscribe((response) => {
-      this.characters = response.results; // Los personajes están en la propiedad "results"
+      // Los personajes están en la propiedad "results"
+      this.characters = response.results;
     });
   }
 }

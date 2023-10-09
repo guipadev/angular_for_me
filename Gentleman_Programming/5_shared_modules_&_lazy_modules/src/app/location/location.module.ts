@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+
 import { LocationComponent } from './location.component';
 import { BreadCrumModule } from '../shared/components/breadcrum/breadcrum.module';
-import { RouterModule, Routes } from '@angular/router';
 
 /**
  * Nos faltaria es nuestra propia ruta apuntando a este componente, en este caso vamos a crear
@@ -21,9 +22,9 @@ const routes: Routes = [
  * para despues usarlo en otro lado
  */
 @NgModule({
-  declarations: [LocationComponent], // declaramos aquí nuestro componente y quitamos de app.module
   imports: [CommonModule, BreadCrumModule, RouterModule.forChild(routes)], // Importamos el modulo aquí. RouterModule rutas hijas
   exports: [],
+  declarations: [LocationComponent], // declaramos aquí nuestro componente y quitamos de app.module
   providers: [],
 })
 export class LocationModule {}

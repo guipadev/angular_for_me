@@ -1,9 +1,12 @@
 <div class="location">
-  <app-breadcrum [title]="'locations'" [titleButton]="'Characteres'">
-  </app-breadcrum>
-  <ul>
-    <li *ngFor="let location of locations">
-      {{ location.name }}
+  <app-breadcrum
+    [title]="'Rick and Morty'"
+    [link]="'/'"
+    [titleButton]="'Character'"
+  ></app-breadcrum>
+  <ul class="dimension-list">
+    <li *ngFor="let location of locations" class="dimension-item">
+      {{ location.dimension }}
     </li>
   </ul>
 </div>

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './home.component';
 import { BreadCrumModule } from '../shared/components/breadcrum/breadcrum.module';
-import { RouterModule, Routes } from '@angular/router';
 
 /**
  * Nos faltaria es nuestra propia ruta apuntando a este componente, en este caso vamos a crear
@@ -11,7 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
  */
 const routes: Routes = [
   {
-    path: '', // cuando ruta esta vacia renderia el componente LocationComponent
+    path: '', // cuando ruta esta vacia renderia el componente HomeComponent
     component: HomeComponent,
   },
 ];

@@ -1,0 +1,13 @@
+.location {
+    padding: 20px;
+  }
+  
+  .dimension-list {
+    list-style-type: disc; /* Puedes cambiar el estilo de la viñeta según tus preferencias */
+    padding-left: 20px; /* Espacio entre el margen izquierdo y el marcador */
+  }
+  
+  .dimension-item {
+    margin-bottom: 5px; /* Espacio entre elementos de la lista */
+  }
+  
