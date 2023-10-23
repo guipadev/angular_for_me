@@ -1,0 +1,18 @@
+<p>
+    Nombre: {{ nombre }}
+    Apellido: {{ apellido }}
+    Edad: {{ edad + 5 }} <!-- como es un # le podemos hacer operaciones -->
+    <!-- SI ELEMENTO FUERA PRIVADO
+    Edad: {{ getEdad() }}
+    -->
+</p>
+
+<!-- Evento por interpolación -->
+<!-- Acceder a var de nuestro html para uso ejemplo: -->
+<!--
+<div (keyup)='0'>
+    <label>Repetidor:</label>
+    <input #entrada />          le asignadmos el valor de variable con #
+    {{ entrada.value }}
+</div>
+-->

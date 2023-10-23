@@ -1,0 +1,9 @@
+<h1>Componente Padre: App</h1>
+<!-- Al componente hijo pasamos el dato var del componente padre -->
+<!-- Componente hijo al padre Va el nombre del evento del hijo, ejecutamos la funcion recibir mensaje y debemos obtener/cachear el evento  -->
+<app-hijo [mensaje]="mensajePadre" (enviar)="recibirMensaje($event)" (enviar)="recibirOtroMsj($event)"></app-hijo>
+
+<!-- Mensaje del componente hijo -->
+<p>El mensaje enviado por el componente hijo es: {{ mensajeRecibidoHijo }}</p>
+
+<p>El mensaje enviado por el componente hijo es: {{ mensajeRecibidoHijo | json }}</p>
