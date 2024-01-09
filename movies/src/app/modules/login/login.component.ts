@@ -12,6 +12,8 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 
 import { properties } from '../../../assets/properties/properties';
+import { ApiService } from '../../services/api.service';
+import { constantUri } from '../../utils/constantUri';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +33,10 @@ export class LoginComponent {
 
   formLogin: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private readonly apiService: ApiService<any>
+  ) {}
 
   ngOnInit(): void {
     this.formLogin = this.fb.group({
@@ -50,6 +55,19 @@ export class LoginComponent {
       return;
     }
 
-    console.log(this.formLogin.value);
+    const { username, password } = this.formLogin.value;
+
+    const body = {
+      username,
+      password,
+    };
+
+    const configPost = {
+      url: constantUri.validateWithLogin,
+      params: constantUri.apikey,
+      body,
+    };
+
+    //this.apiService.postService();
   }
 }
